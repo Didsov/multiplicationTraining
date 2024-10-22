@@ -4,7 +4,7 @@ import React from "react";
 const Problem = ({A, B, answer, onChange, isDone}) => {
   const intAnswer = parseInt(answer)
   const problemStyle = classNames(
-    'flex rounded-xl my-2 ', {
+    'flex rounded-xl m-2 ', {
       'bg-gradient-to-r from-green-300 to-green-100': isDone && A*B === intAnswer,
       'bg-gradient-to-r from-red-300 to-red-100': isDone &&  A*B !== intAnswer,
     }

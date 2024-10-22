@@ -12,13 +12,20 @@ const SETTINGS = {
 function getRandomElement(arr) {
   return arr[Math.floor(Math.random() * arr.length)];
 }
+function getMMSS(sec){
+    const date = new Date(null);
+    date.setSeconds(sec); // specify value for SECONDS here
+    const result = date.toISOString().slice(14, 19);
+    return result
+}
 
 function App() {
   const [isWork, setisWork] = useState(false);
   const [isDone, setisDone] = useState(false);
   const [isTimerWork, setIsTimerWork] = useState(false);
   const [time, setTime] = useState(0)
-
+  const [answerCount, setAnswerCount] = useState(0)
+  const [lastTime, setLastTime] = useState(0)
   const [problems, setProblems] = useState([]); // Массив задач
   const [answers, setAnswers] = useState([]); // Введенные ответы
 
@@ -39,6 +46,7 @@ function App() {
     setTime(0)
   }
   const handleStopTimer = ()=>{
+    setLastTime(time)
     setIsTimerWork(false)
   }
   const handleStart = () => {
@@ -52,8 +60,17 @@ function App() {
     handleStart();
   };
   const handleDone = () => {
+    let counter = 0;
+    problems.map((problem, index)=>{
+      if(problem.A * problem.B === parseInt(answers[index])){
+        counter += 1
+      }
+    })
+    setAnswerCount(counter)
     setisDone(true);
     handleStopTimer();
+
+    console.log(problems)
   };
   const handleInputChange = (index, value) => {
     if (/^\d{0,2}$/.test(value)) {
@@ -79,7 +96,7 @@ function App() {
   return (
     <>
       <div className="flex justify-center bg-slate-100 min-w-screen min-h-screen p-4">
-        <div className=" flex flex-col items-center   max-w-[320px] w-full">
+        <div className=" flex flex-col items-center   max-w-[400px] w-full">
           <Clock time={time}/>
           {!isWork && (
             <>
@@ -93,7 +110,7 @@ function App() {
               <Button handleClick={handleReStart} color={"red"}>
                 ReStart
               </Button>
-              <ul className="flex text-xl sm:flex-wrap sm:flex-row flex-col p-2 m-2 justify-between ">
+              <ul className="flex text-xl flex-wrap flex-row  p-2 m-2 justify-center ">
                 {problems.map((problem, index) => (
                   <Problem
                     key={index}
@@ -110,9 +127,13 @@ function App() {
                   Done
                 </Button>
               ) : (
+                <>
                 <Button handleClick={handleReStart} color={"green"}>
                   RESTART
                 </Button>
+                
+                <p>Решено: {answerCount}/{SETTINGS.countProblem} ({answerCount/SETTINGS.countProblem *100}%) за {getMMSS(lastTime)}</p>
+                </>
               )}
             </>
           )}
