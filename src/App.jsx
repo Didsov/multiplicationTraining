@@ -32,6 +32,11 @@ function App() {
   const [problems, setProblems] = useState([]); // Массив задач
   const [answers, setAnswers] = useState([]); // Введенные ответы
   
+  useEffect(()=>{
+    console.log("Ver 1.3 24.10")
+  }, [])
+
+
   //Созранение состояния в локальном хранилище
   const [settings, setSettings] = useState(() => { // Инициируем состояние сразу из local storage
     const savedSettings = window.localStorage.getItem('TRAINER_SETTINGS'); // берем изначение из локала по ключу
