@@ -121,10 +121,12 @@ function App() {
       {isModal&&<ModalSettings settings={settings} setSettings={setSettings} handleClose={handleCloseModal}/>}
         
         <div className=" flex flex-col items-center   max-w-[400px] w-full ">
-          <button className="flex items-center  group absolute right-4 top-4 p-4 " onClick={handleOpenModal}>
+          {!isModal && (
+            <button className="flex items-center  group absolute right-0 sm:right-4 top-0 p-4 " onClick={handleOpenModal}>
             <p className="text-lg hidden sm:block font-bold mr-2 group-hover:underline">Settings</p>
             <GearSvg/>
           </button>
+          )}
           <Clock time={time}/>
           {!isWork && (
             <>

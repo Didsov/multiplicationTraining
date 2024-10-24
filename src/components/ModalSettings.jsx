@@ -38,7 +38,7 @@ const ModalSettings = ({ handleClose, settings, setSettings }) => {
     >
       <div
         onClick={handleContainerClick}
-        className="max-w-[400px] max-h-[600px] w-full h-full bg-white flex items-center flex-col relative"
+        className="max-w-[400px] max-h-[600px] w-full h-full bg-white flex items-center flex-col relative p-2"
       >
         <span onClick={handleClose} className="w-[50px] absolute right-[5px] top-2 cursor-pointer"><CrossSvg/></span>
         <h2 className="p-2 text-xl font-bold">Настроки</h2>
