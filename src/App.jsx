@@ -76,7 +76,7 @@ function App() {
     setisWork(true);
     setisDone(false);
     handleReStartTimer();
-    setAnswers(Array(settings.countProblem).fill(""));
+    setAnswers(Array(parseInt(settings.countProblem)).fill(""));
   };
   const handleReStart = () => {
     handleStart();
